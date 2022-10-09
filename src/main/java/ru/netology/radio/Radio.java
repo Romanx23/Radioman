@@ -1,55 +1,83 @@
 package ru.netology.radio;
 
 public class Radio {
-    int volume;
-    int radioStation;
-    private int maxVolume = 10;
-    private int maxRadioStation = 9;
+    public int numberOfStations = 10;
+    private int currentStation;
+    private int currentVolume;
+    private int MaxVolume =100;
+    private int MinVolume =0;
 
-    public int getVolume() {
-        return volume;
+    public Radio() {
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
     }
 
-    public int getRadioStation() {
-        return radioStation;
+    public void setCurrentStation(int currentStation) {
+        if (currentStation < 0) {
+            return;
+        }
+        if (currentStation > 9) {
+            return;
+        }
+        this.currentStation = currentStation;
     }
 
-    public void setRadioStation(int radioStation) {
-        this.radioStation = radioStation;
+    public void setNextStation (){
+        if (currentStation<9){
+            currentStation = currentStation +1;
+        }
+        else currentStation = 0;
+        this.currentStation = currentStation;
+    }
+    public void setPreviousStation () {
+        if (currentStation > 0) {
+            currentStation = currentStation - 1;
+        } else currentStation = 9;
+
+        this.currentStation = currentStation;
+    }
+
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setRadioVolume(int currentVolume) {
+        if (currentVolume < MinVolume) {
+            return;
+        }
+        if (currentVolume > MaxVolume) {
+            return;
+        }
+        this.currentVolume = currentVolume;
     }
 
     public void increaseVolume() {
-        if (volume < maxVolume) {
-            volume++;
+        if (currentVolume < MaxVolume) {
+            currentVolume = currentVolume + 1;
         }
+        this.currentVolume = currentVolume;
+
     }
 
-    public void decreaseVolume() {
-        if (volume > 0) {
-            volume--;
+    public void decreaseVolume(){
+        if (currentVolume > MinVolume){
+            currentVolume = currentVolume - 1;
         }
+        this.currentVolume = currentVolume;
     }
 
-    public void nextRadioStation() {
-
-        if (radioStation < maxRadioStation) {
-            radioStation++;
-        } else {
-            radioStation = 0;
-        }
+    public void setMaxVolume() {
+        currentVolume = 100;
     }
 
-    public void prevRadioStation() {
-
-        if (radioStation > 0) {
-            radioStation--;
-        } else {
-            radioStation = maxRadioStation;
-        }
+    public void setMinVolume() {
+        currentVolume = 0;
     }
 
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
 }
